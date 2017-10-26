@@ -13,12 +13,14 @@ import java.util.ArrayList;
 
 public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHolder>{
 
+    //The collection that we will pull elements from to bind to the ViewHolder
     private ArrayList<Recipe> bindableCollection;
 
     public RecipeSearchAdapter(ArrayList<Recipe> collection) {
         this.bindableCollection = collection;
     }
 
+    // Creates an instance of the ViewHolder to bind an item to
     @Override
     public RecipeItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater
@@ -29,6 +31,7 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
 
     }
 
+    // Binds an item to a viewholder
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, int position) {
         Recipe item = bindableCollection.get(position);

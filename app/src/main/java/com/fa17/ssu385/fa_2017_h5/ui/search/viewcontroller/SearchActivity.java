@@ -34,6 +34,8 @@ public class SearchActivity extends AppCompatActivity {
         searchEditText = (EditText)findViewById(R.id.search_edit_text);
         searchButton = (Button)findViewById(R.id.my_search_button);
         recipeResultList = (RecyclerView)findViewById(R.id.recipe_result_list);
+
+        //Layout managers tell RecyclerViews how to display their elements
         linearLayoutManager = new LinearLayoutManager(this);
 
         recipeResultList.setLayoutManager(linearLayoutManager);
@@ -46,9 +48,10 @@ public class SearchActivity extends AppCompatActivity {
                 task.setCallbackListener(new RecipeSearchAsyncTask.OnRecipeFetchResponse() {
                     @Override
                     public void onCallback(RecipeList recipeList) {
+                        // Adapters 'adapt' data to fit in ViewHolders
                         adapter = new RecipeSearchAdapter(recipeList.getRecipes());
 
-
+                        // This sets the adapter for the RecyclerView
                         recipeResultList.setAdapter(adapter);
                     }
                 });
