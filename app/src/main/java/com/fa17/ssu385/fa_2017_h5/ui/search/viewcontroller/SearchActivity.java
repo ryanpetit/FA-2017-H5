@@ -1,6 +1,7 @@
 package com.fa17.ssu385.fa_2017_h5.ui.search.viewcontroller;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +17,10 @@ import com.fa17.ssu385.fa_2017_h5.network.RecipeSearchAsyncTask;
 import com.fa17.ssu385.fa_2017_h5.ui.detail.viewcontroller.RecipeDetailActivity;
 import com.fa17.ssu385.fa_2017_h5.ui.search.adapter.RecipeSearchAdapter;
 
+import org.parceler.Parcel;
 import org.parceler.Parcels;
+
+import java.io.Serializable;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText searchEditText;
@@ -50,7 +54,15 @@ public class SearchActivity extends AppCompatActivity {
                     public void onCallback(RecipeList recipeList) {
                         // Adapters 'adapt' data to fit in ViewHolders
                         adapter = new RecipeSearchAdapter(recipeList.getRecipes());
-
+                        adapter.setRecipeItemClickListener( new RecipeSearchAdapter.RecipeItemClickListener(){
+                            @Override
+                            public void onRecipeItemClicked(Recipe selectedItem) {
+                                Intent navIntent = new Intent(SearchActivity.this, RecipeDetailActivity.class);
+                                Parcelable parcel = Parcels.wrap(selectedItem);
+                                navIntent.putExtra(RecipeDetailActivity.RECIPE_EXTRA_KEY, parcel);
+                                startActivity(navIntent);
+                            }
+                        });
                         // This sets the adapter for the RecyclerView
                         recipeResultList.setAdapter(adapter);
                     }
