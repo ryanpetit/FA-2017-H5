@@ -13,6 +13,16 @@ import java.util.ArrayList;
 
 public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHolder>{
 
+    private RecipeItemClickListener recipeItemClickListener;
+
+    public interface RecipeItemClickListener {
+        void onRecipeItemClicked (Recipe selectedItem);
+    }
+
+    public void setRecipeItemClickListener(RecipeItemClickListener recipeItemClickListener) {
+        this.recipeItemClickListener = recipeItemClickListener;
+    }
+
     //The collection that we will pull elements from to bind to the ViewHolder
     private ArrayList<Recipe> bindableCollection;
 
@@ -35,12 +45,21 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, int position) {
         Recipe item = bindableCollection.get(position);
+        holder.setListener(new RecipeItemViewHolder.OnItemClickedListener);
 
         holder.bindView(item);
+    }
+
+    @Override
+    public void onItemClicked() {
+        if (recipeItemClickListener != null) {
+            recipeItemClickListener.onRecipeItemClicked(bindableCollection.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
         return this.bindableCollection.size();
     }
+
 }

@@ -12,6 +12,16 @@ import com.fa17.ssu385.fa_2017_h5.model.Recipe;
 public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private TextView recipeName;
     private ImageView recipeThumbnail;
+    private TextView sourceDisplayName;
+    private OnItemClickedListener listener;
+
+    public interface OnItemClickedListener {
+        void onItemClicked(int position);
+    }
+
+    public void setListener(OnItemClickedListener listener) {
+        this.listener = listener;
+    }
 
     public RecipeItemViewHolder(View itemView) {
         super(itemView);
@@ -20,10 +30,13 @@ public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements Vie
         recipeThumbnail = (ImageView)itemView.findViewById(R.id.recipe_thumbnail);
         recipeName.setOnClickListener(this);
         recipeThumbnail.setOnClickListener(this);
+        sourceDisplayName = (TextView)itemView.findViewById(R.id.sourceDisplayName);
+        sourceDisplayName.setOnClickListener(this);
     }
 
     public void bindView(Recipe item) {
         recipeName.setText(item.getName());
+        sourceDisplayName.setText(item.getSource());
 
         Glide.with(this.itemView)
                 .load(item.getThumbnailSources().get(0))
@@ -32,6 +45,8 @@ public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements Vie
 
     @Override
     public void onClick(View view) {
+
+        listener.onItemClicked(RecipeItemViewHolder.this.getLayoutPosition());
 
     }
 
