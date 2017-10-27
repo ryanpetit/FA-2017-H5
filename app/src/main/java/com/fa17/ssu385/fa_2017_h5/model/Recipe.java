@@ -2,8 +2,11 @@ package com.fa17.ssu385.fa_2017_h5.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
+@Parcel
 public class Recipe {
     @SerializedName("recipeName")
     private String name;
