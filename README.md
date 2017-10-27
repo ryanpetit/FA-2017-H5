@@ -10,6 +10,7 @@ annotationProcessor 'org.parceler:parceler:1.1.9'
 
 
 Recipe
+
 Decorate the class with the @Parcel annotation.
 
 
