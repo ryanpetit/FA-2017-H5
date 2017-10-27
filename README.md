@@ -9,8 +9,9 @@ In the Module:app build.gradle, add the following annotation under the "compile 
 annotationProcessor 'org.parceler:parceler:1.1.9'
 
 
-Recipe
 
+
+Recipe
 Decorate the class with the @Parcel annotation.
 
 
