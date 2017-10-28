@@ -18,13 +18,15 @@ import com.fa17.ssu385.fa_2017_h5.ui.search.adapter.RecipeSearchAdapter;
 
 import org.parceler.Parcels;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements RecipeSearchAdapter.RecipeItemClickListener {
     private EditText searchEditText;
     private Button searchButton;
     private RecipeSearchAsyncTask task;
     private LinearLayoutManager linearLayoutManager;
     private RecipeSearchAdapter adapter;
     private RecyclerView recipeResultList;
+
+    private RecipeSearchAdapter.RecipeItemClickListener recipeItemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class SearchActivity extends AppCompatActivity {
                     public void onCallback(RecipeList recipeList) {
                         // Adapters 'adapt' data to fit in ViewHolders
                         adapter = new RecipeSearchAdapter(recipeList.getRecipes());
-
+                        adapter.setRecipeItemClickListener(recipeItemClickListener);
                         // This sets the adapter for the RecyclerView
                         recipeResultList.setAdapter(adapter);
                     }
@@ -60,5 +62,12 @@ public class SearchActivity extends AppCompatActivity {
                 task.execute(searchTerms);
             }
         });
+    }
+
+    @Override
+    public void onRecipeItemClicked(Recipe selectedItem) {
+        Intent navIntent = new Intent(this, RecipeDetailActivity.class);
+        navIntent.putExtra(RecipeDetailActivity.RECIPE_EXTRA_KEY, Parcels.wrap(selectedItem));
+        startActivity(navIntent);
     }
 }
