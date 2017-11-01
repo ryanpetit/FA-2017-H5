@@ -15,6 +15,11 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
 
     //The collection that we will pull elements from to bind to the ViewHolder
     private ArrayList<Recipe> bindableCollection;
+    private RecipeItemClickListener recipeItemClickListener;
+
+    public void setRecipeItemClickListener(RecipeItemClickListener recipeItemClickListener) {
+        this.recipeItemClickListener = recipeItemClickListener;
+    }
 
     public RecipeSearchAdapter(ArrayList<Recipe> collection) {
         this.bindableCollection = collection;
@@ -28,7 +33,6 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
                 .inflate(R.layout.recipe_search_item, parent, false);
 
         return new RecipeItemViewHolder(inflatedView);
-
     }
 
     // Binds an item to a viewholder
@@ -36,11 +40,24 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
     public void onBindViewHolder(RecipeItemViewHolder holder, int position) {
         Recipe item = bindableCollection.get(position);
 
+        holder.setListener(new RecipeItemViewHolder.OnItemClickedListener() {
+            @Override
+            public void onItemClicked(int position) {
+                if (recipeItemClickListener != null) {
+                    recipeItemClickListener.onRecipeItemClicked(bindableCollection.get(position));
+                }
+            }
+        });
+
         holder.bindView(item);
     }
 
     @Override
     public int getItemCount() {
         return this.bindableCollection.size();
+    }
+
+    public interface RecipeItemClickListener {
+        void onRecipeItemClicked(Recipe selectedItem);
     }
 }
