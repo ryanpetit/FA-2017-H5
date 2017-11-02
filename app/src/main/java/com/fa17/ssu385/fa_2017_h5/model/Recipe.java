@@ -14,6 +14,9 @@ public class Recipe {
     @SerializedName("id")
     private String recipeId;
 
+    @SerializedName("description")
+    private String recipeDescription;
+
     @SerializedName("ingredients")
     private ArrayList<String> ingredients;
 
@@ -30,6 +33,10 @@ public class Recipe {
 
     public String getRecipeId() {
         return recipeId;
+    }
+
+    public String getRecipeDescription(){
+        return recipeDescription;
     }
 
     public ArrayList<String> getIngredients() {
