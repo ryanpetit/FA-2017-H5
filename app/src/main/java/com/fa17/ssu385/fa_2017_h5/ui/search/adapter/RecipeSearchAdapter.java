@@ -45,17 +45,18 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
     @Override
     public void onBindViewHolder(RecipeItemViewHolder holder, int position) {
         Recipe item = bindableCollection.get(position);
-        holder.setListener(new RecipeItemViewHolder.OnItemClickedListener);
+        holder.setListener(new RecipeItemViewHolder.OnItemClickedListener() {
 
+            @Override
+            public void onItemClicked(int position) {
+                if (recipeItemClickListener != null) {
+                    recipeItemClickListener.onRecipeItemClicked(bindableCollection.get(position));
+                }
+            }
+        });
         holder.bindView(item);
     }
 
-    @Override
-    public void onItemClicked() {
-        if (recipeItemClickListener != null) {
-            recipeItemClickListener.onRecipeItemClicked(bindableCollection.get(position));
-        }
-    }
 
     @Override
     public int getItemCount() {

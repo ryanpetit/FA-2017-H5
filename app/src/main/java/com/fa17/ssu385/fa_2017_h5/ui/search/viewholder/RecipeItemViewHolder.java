@@ -30,7 +30,7 @@ public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements Vie
         recipeThumbnail = (ImageView)itemView.findViewById(R.id.recipe_thumbnail);
         recipeName.setOnClickListener(this);
         recipeThumbnail.setOnClickListener(this);
-        sourceDisplayName = (TextView)itemView.findViewById(R.id.sourceDisplayName);
+        sourceDisplayName = (TextView)itemView.findViewById(R.id.source_display_name);
         sourceDisplayName.setOnClickListener(this);
     }
 
