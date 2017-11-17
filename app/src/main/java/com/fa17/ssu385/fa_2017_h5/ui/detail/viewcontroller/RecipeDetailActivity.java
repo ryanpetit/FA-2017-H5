@@ -28,11 +28,11 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeDescription = (TextView)findViewById(R.id.recipe_description);
         recipeDetailImage = (ImageView)findViewById(R.id.recipe_detail_image);
 
-        Recipe recipe = Parcels.unwrap(getIntent().getParcelable(RECIPE_EXTRA_KEY));
+        Recipe recipe = Parcels.unwrap(getIntent().getParcelableExtra(RECIPE_EXTRA_KEY));
         recipeDetailName.setText(recipe.getName());
         recipeDescription.setText(recipe.getName());
 
-        Glide.with(this).load(recipe.getThumbnailSources.get(0)).into(recipeDetailImage);
+        Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeDetailImage);
 
     }
 }
