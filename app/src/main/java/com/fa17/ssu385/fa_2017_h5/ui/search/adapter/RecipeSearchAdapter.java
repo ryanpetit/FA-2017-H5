@@ -15,19 +15,20 @@ public class RecipeSearchAdapter extends RecyclerView.Adapter<RecipeItemViewHold
 
     private RecipeItemClickListener recipeClick;
     //The collection that we will pull elements from to bind to the ViewHolder
+    public interface RecipeItemClickListener{
+        void onRecipeItemClicked (Recipe selectedItem);
+    }
+
+    public void setRecipeItemClickListener(RecipeItemClickListener recipeClick) {
+        this.recipeClick = recipeClick;
+    }
+
     private ArrayList<Recipe> bindableCollection;
 
     public RecipeSearchAdapter(ArrayList<Recipe> collection) {
         this.bindableCollection = collection;
     }
 
-    public void setRecipeClick(RecipeItemClickListener recipeClick) {
-        this.recipeClick = recipeClick;
-    }
-
-    public interface RecipeItemClickListener{
-        void onRecipeItemClicked(Recipe selectedItem);
-    }
 
     // Creates an instance of the ViewHolder to bind an item to
     @Override

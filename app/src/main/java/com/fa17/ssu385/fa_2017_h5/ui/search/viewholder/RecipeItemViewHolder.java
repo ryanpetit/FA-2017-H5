@@ -15,6 +15,13 @@ public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements Vie
     private TextView sourceDisplayName;
     private OnItemClickedListener listener;
 
+
+    public interface OnItemClickedListener {
+        void onItemClicked(int position);
+    }
+
+    public void setListener(OnItemClickedListener listener) { this.listener = listener; }
+
     public RecipeItemViewHolder(View itemView) {
         super(itemView);
 
@@ -27,23 +34,14 @@ public class RecipeItemViewHolder extends RecyclerView.ViewHolder implements Vie
 
     }
 
-    public void setListener(OnItemClickedListener listener) {
-        this.listener = listener;
-    }
-
-    public interface OnItemClickedListener {
-        void onItemClicked(int position);
-    }
-
-
 
     public void bindView(Recipe item) {
         recipeName.setText(item.getName());
+        sourceDisplayName.setText(item.getSource());
 
         Glide.with(this.itemView)
                 .load(item.getThumbnailSources().get(0))
                 .into(recipeThumbnail);
-        sourceDisplayName.setText(item.getSource());
     }
 
     @Override
