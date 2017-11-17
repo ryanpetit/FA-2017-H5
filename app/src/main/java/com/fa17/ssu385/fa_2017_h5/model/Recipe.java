@@ -3,7 +3,9 @@ package com.fa17.ssu385.fa_2017_h5.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import org.parceler.Parcel;
 
+@Parcel
 public class Recipe {
     @SerializedName("recipeName")
     private String name;

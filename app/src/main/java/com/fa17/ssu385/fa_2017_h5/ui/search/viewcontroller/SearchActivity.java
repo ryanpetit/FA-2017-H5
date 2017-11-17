@@ -50,8 +50,15 @@ public class SearchActivity extends AppCompatActivity {
                     public void onCallback(RecipeList recipeList) {
                         // Adapters 'adapt' data to fit in ViewHolders
                         adapter = new RecipeSearchAdapter(recipeList.getRecipes());
-
-                        // This sets the adapter for the RecyclerView
+                        adapter.setRecipeItemClickListener(new RecipeSearchAdapter.RecipeItemClickListener() {
+                            @Override
+                            public void onRecipeItemClicked(Recipe selectedItem) {
+                                Intent navIntent = new Intent(SearchActivity.this, RecipeDetailActivity.class);
+                                navIntent.putExtra(RecipeDetailActivity.RECIPE_EXTRA_KEY, Parcels.wrap(selectedItem));
+                                startActivity(navIntent);
+                            }
+                        });
+                        // Sets the adapter for the RecyclerView
                         recipeResultList.setAdapter(adapter);
                     }
                 });
