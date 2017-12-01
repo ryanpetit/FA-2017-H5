@@ -2,6 +2,7 @@ package com.fa17.ssu385.fa_2017_h5.ui.detail.viewcontroller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,7 +13,9 @@ import org.parceler.Parcels;
 
 public class RecipeDetailActivity extends AppCompatActivity {
     public static final String RECIPE_EXTRA_KEY = "recipeExtraKey";
-
+    private TextView recipeDetailName;
+    private TextView recipeDescription;
+    private ImageView recipeDetailImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
