@@ -1,6 +1,7 @@
 package com.fa17.ssu385.fa_2017_h5.ui.search.viewcontroller;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,13 +51,13 @@ public class SearchActivity extends AppCompatActivity {
                     public void onCallback(RecipeList recipeList) {
                         // Adapters 'adapt' data to fit in ViewHolders
                         adapter = new RecipeSearchAdapter(recipeList.getRecipes());
+
                         adapter.setRecipeItemClickListener(new RecipeSearchAdapter.RecipeItemClickListener() {
                             @Override
                             public void onRecipeItemClicked(Recipe selectedItem) {
                                 Intent navIntent = new Intent(SearchActivity.this, RecipeDetailActivity.class);
                                 navIntent.putExtra(RecipeDetailActivity.RECIPE_EXTRA_KEY, Parcels.wrap(selectedItem));
                                 startActivity(navIntent);
-
                             }
                         });
                         // This sets the adapter for the RecyclerView

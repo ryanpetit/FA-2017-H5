@@ -11,14 +11,13 @@ import com.fa17.ssu385.fa_2017_h5.model.Recipe;
 
 import org.parceler.Parcels;
 
-import java.util.ArrayList;
-
 public class RecipeDetailActivity extends AppCompatActivity {
     public static final String RECIPE_EXTRA_KEY = "recipeExtraKey";
 
     private TextView recipeDetailName;
     private TextView recipeDescription;
     private ImageView recipeDetailImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +30,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         Recipe recipe = Parcels.unwrap(getIntent().getParcelableExtra(RECIPE_EXTRA_KEY));
 
-        recipeDetailName.setText(recipe.getName());
-        recipeDescription.setText(recipe.getSource());
-        Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeDetailImage);
 
+        recipeDetailName.setText(recipe.getName());
+        recipeDescription.setText(recipe.getDescription());
+
+        Glide.with(this).load(recipe.getThumbnailSources().get(0)).into(recipeDetailImage);
     }
 }
